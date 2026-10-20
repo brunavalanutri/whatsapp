@@ -45,7 +45,8 @@
       <section class="card" style="margin:0"><h3>Sem atualização ou contato há mais de 10 dias</h3><p class="sub">Pacientes sem data de contato registrada também aparecem para você conferir.</p><div id="overduePatientsTable" class="table-wrap"><div class="empty">Carregando...</div></div></section>
     </div>
     <section class="card" style="margin:16px 0 0"><h3>Registro manual da última conversa</h3><p class="sub">Atualize a data quando conversar com o paciente, mesmo que a conversa não tenha sido importada. A observação é opcional.</p><div id="contactRegisterTable" class="table-wrap"><div class="empty">Carregando pacientes...</div></div></section>
-  </section>\n  <section class="card" id="weeklyImportCard">
+  </section>
+  <section class="card" id="weeklyImportCard">
     <div class="section-head"><div><h2 style="margin:0;font-size:17px">Importação geral da semana</h2><p class="sub" style="margin:4px 0 0">Selecione vários arquivos .txt exportados do WhatsApp. Grupos identificados serão excluídos da importação.</p></div><span class="badge">Em lote</span></div>
     <div class="field"><label for="weeklyFiles">Arquivos de conversas (.txt — selecione vários)</label><input id="weeklyFiles" type="file" accept=".txt,text/plain" multiple></div>
     <div class="field"><label for="weeklyNutriAlias">Seu nome no WhatsApp</label><input id="weeklyNutriAlias" placeholder="Ex.: Bruna"></div>
@@ -261,7 +262,7 @@ async function saveContactRecord(patientId){
  if(error){console.error(error);toast('Não foi possível salvar a data do contato.');return}
  toast('Último contato atualizado.');await loadDashboard();
 }
-\nfunction renderPatients(){
+function renderPatients(){
   const q=norm($('patientSearch').value);
   const arr=state.patients.filter(p=>norm(p.nome).includes(q)||norm(p.celular).includes(q));
   $('patientList').innerHTML=arr.length?arr.map(p=>'<button class="patient '+(state.selected?.id===p.id?'active':'')+'" data-patient="'+p.id+'"><strong>'+esc(p.nome)+'</strong><span>'+esc(p.celular||'Sem celular')+' · '+(p.paciente_ativo===false?'Inativo':'Ativo')+'</span></button>').join(''):'<div class="empty">Nenhum paciente encontrado.</div>';
