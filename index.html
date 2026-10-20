@@ -31,6 +31,19 @@
     <div class="row"><span id="userLabel" class="muted small"></span><button class="secondary" id="logoutBtn">Sair</button></div>
   </header>
   <div class="notice">As conversas são importadas manualmente. Este aplicativo não acessa automaticamente o WhatsApp e não envia mensagens.</div>
+  <section class="card" id="weeklyImportCard">
+    <div class="section-head"><div><h2 style="margin:0;font-size:17px">Importação geral da semana</h2><p class="sub" style="margin:4px 0 0">Selecione vários arquivos .txt exportados do WhatsApp. Grupos identificados serão excluídos da importação.</p></div><span class="badge">Em lote</span></div>
+    <div class="field"><label for="weeklyFiles">Arquivos de conversas (.txt — selecione vários)</label><input id="weeklyFiles" type="file" accept=".txt,text/plain" multiple></div>
+    <div class="field"><label for="weeklyNutriAlias">Seu nome no WhatsApp</label><input id="weeklyNutriAlias" placeholder="Ex.: Bruna"></div>
+    <div class="row stack-mobile"><button id="weeklyPreviewBtn" class="secondary">Analisar arquivos</button><button id="weeklySaveBtn" disabled>Importar conversas válidas</button></div>
+    <div id="weeklySummary" class="small muted" style="margin-top:12px">Nenhum arquivo analisado.</div>
+    <div id="weeklyPreview" class="hidden" style="margin-top:12px"></div>
+    <p class="small muted" style="margin:12px 0 0">A classificação é automática e aproximada. Confira a prévia antes de salvar; contatos não reconhecidos como pacientes serão classificados como leads.</p>
+  </section>
+  <section class="card" id="leadsCard">
+    <div class="section-head"><div><h2 style="margin:0;font-size:17px">Leads identificados</h2><p class="sub" style="margin:4px 0 0">Contatos individuais ainda não vinculados a um paciente cadastrado.</p></div><button id="refreshLeadsBtn" class="ghost">Atualizar</button></div>
+    <div id="leadsList"><div class="empty">Carregando leads...</div></div>
+  </section>
   <div class="layout">
     <aside class="panel sidebar">
       <div class="section-head"><h2>Pacientes</h2><span id="patientCount" class="badge">0</span></div>
@@ -94,7 +107,7 @@ const SUPABASE_URL='https://fcxinzdazmnuodwujqpj.supabase.co';
 const SUPABASE_KEY='sb_publishable_VSXr4uYY_okHJpJqiGUUBw_kkBW2ZgU';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
-const state={patients:[],selected:null,conversations:[],tasks:[],activeConversation:null,preview:[],previewName:'',user:null};
+const state={patients:[],selected:null,conversations:[],tasks:[],activeConversation:null,preview:[],previewName:'',user:null,weekly:[]};
 let toastTimer;
 function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3500)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -140,7 +153,68 @@ async function showApp(user){
 async function loadPatients(){
   const {data,error}=await sb.from('pacientes').select('id,nome,celular,cc,paciente_ativo,acesso_ativo').order('nome');
   if(error){console.error(error);toast('Não foi possível carregar os pacientes.');return}
-  state.patients=data||[];$('patientCount').textContent=state.patients.length;renderPatients();
+  state.patients=data||[];$('patientCount').textContent=state.patients.length;renderPatients();await loadLeads();
+}
+function classifyWeeklyFile(file,raw){
+  const name=file.name.replace(/\\.txt$/i,'').replace(/[_-]+/g,' ').trim();
+  const n=norm(name);
+  const patient=state.patients.find(p=>{const pn=norm(p.nome);const phone=String(p.celular||'').replace(/\\D/g,'');const nf=n.replace(/\\D/g,'');return (pn.length>2&&(n===pn||n.includes(pn)||pn.includes(n)))||(phone.length>=8&&nf.includes(phone))});
+  const messages=parseWhatsApp(raw,patient?.nome||name,$('weeklyNutriAlias').value.trim());
+  const senders=[...new Set(messages.map(m=>norm(m.sender)).filter(Boolean))];
+  const groupMarkers=/\b(created group|added you|added .* to the group|changed the subject|changed this group's icon|left the group|removed .* from the group|criou o grupo|adicionou|alterou o nome do grupo|alterou a imagem do grupo|saiu do grupo|removeu)\b/i.test(raw);
+  const isGroup=groupMarkers||senders.length>2;
+  return {file,raw,name,messages,patient:patient||null,isGroup,category:patient?'paciente':'lead',senderCount:senders.length,duplicate:false};
+}
+async function analyzeWeeklyFiles(){
+  const files=[...($('weeklyFiles').files||[])];
+  if(!files.length)return toast('Selecione um ou mais arquivos .txt.');
+  const rows=[];
+  for(const file of files){
+    try{const raw=await file.text();const row=classifyWeeklyFile(file,raw);row.duplicate=false;rows.push(row)}
+    catch(e){rows.push({file,name:file.name,messages:[],patient:null,isGroup:false,category:'erro',error:true})}
+  }
+  const seen=new Set();
+  for(const row of rows){const key=norm(row.file.name)+'|'+(row.messages[0]?.date||'');if(seen.has(key))row.duplicate=true;seen.add(key)}
+  state.weekly=rows;
+  const valid=rows.filter(r=>!r.isGroup&&!r.error&&!r.duplicate&&r.messages.length);
+  const patients=valid.filter(r=>r.patient).length,leads=valid.filter(r=>!r.patient).length,groups=rows.filter(r=>r.isGroup).length,dupes=rows.filter(r=>r.duplicate).length,errors=rows.filter(r=>r.error||!r.messages.length).length;
+  $('weeklySummary').textContent=rows.length+' arquivo(s) analisado(s): '+patients+' paciente(s), '+leads+' lead(s), '+groups+' grupo(s) excluído(s), '+dupes+' possível(is) duplicado(s), '+errors+' arquivo(s) sem mensagens reconhecidas.';
+  $('weeklyPreview').innerHTML=rows.map((r,i)=>'<div class="task"><div class="details"><strong>'+esc(r.name||r.file.name)+'</strong><p>'+(r.patient?'Paciente cadastrado: '+esc(r.patient.nome):'Lead / contato ainda não cadastrado')+' · '+(r.messages?.length||0)+' mensagens · '+(r.senderCount||0)+' remetentes</p><span class="badge '+(r.isGroup?'amber':r.error||!r.messages?.length?'':'green')+'">'+(r.isGroup?'Grupo — será excluído':r.error||!r.messages?.length?'Não reconhecido':r.duplicate?'Possível duplicado — será ignorado':r.patient?'Paciente':'Lead')+'</span></div></div>').join('');
+  $('weeklyPreview').classList.remove('hidden');$('weeklySaveBtn').disabled=valid.length===0;
+}
+async function saveWeeklyImport(){
+  const valid=state.weekly.filter(r=>!r.isGroup&&!r.error&&!r.duplicate&&r.messages.length);
+  if(!valid.length)return toast('Não há conversas válidas para importar.');
+  $('weeklySaveBtn').disabled=true;let saved=0,failed=0;
+  for(const row of valid){
+    const dates=row.messages.map(m=>m.date).filter(Boolean).sort();
+    const {data:conv,error}=await sb.from('whatsapp_conversas').insert({
+      paciente_id:row.patient?.id||null,nome_arquivo:row.file.name,
+      contato_nome:row.patient?.nome||row.name,categoria:row.patient?'paciente':'lead',eh_grupo:false,
+      inicio_mensagens:dates[0]||null,fim_mensagens:dates.at(-1)||null
+    }).select().single();
+    if(error){console.error(error);failed++;continue}
+    const payload=row.messages.map(m=>({conversa_id:conv.id,data_mensagem:m.date,remetente:m.who,nome_remetente:m.sender,conteudo:m.body,ordem:m.order}));
+    let messageError=null;
+    for(let i=0;i<payload.length;i+=250){const {error:e}=await sb.from('whatsapp_mensagens').insert(payload.slice(i,i+250));if(e){messageError=e;break}}
+    if(messageError){console.error(messageError);await sb.from('whatsapp_conversas').delete().eq('id',conv.id);failed++}else saved++;
+  }
+  toast(saved+' conversa(s) importada(s).'+(failed?' Falhas: '+failed+'.':''));$('weeklySaveBtn').disabled=true;await loadLeads();
+  if(state.selected)await loadConversations();
+}
+async function loadLeads(){
+  const {data,error}=await sb.from('whatsapp_conversas').select('id,contato_nome,nome_arquivo,importada_em,resumo').eq('categoria','lead').order('importada_em',{ascending:false}).limit(100);
+  if(error){console.error(error);$('leadsList').innerHTML='<div class="empty">A lista de leads estará disponível após aplicar a atualização do banco.</div>';return}
+  $('leadsList').innerHTML=(data||[]).length?data.map(c=>'<div class="task"><div class="details"><strong>'+esc(c.contato_nome||c.nome_arquivo||'Contato sem nome')+'</strong><p>Importado em '+formatDate(c.importada_em)+'</p><p>'+(c.resumo?esc(c.resumo.slice(0,100)):'Sem resumo cadastrado')+'</p></div><button class="secondary" data-lead-open="'+c.id+'">Abrir</button></div>').join(''):'<div class="empty">Nenhum lead importado ainda.</div>';
+  document.querySelectorAll('[data-lead-open]').forEach(b=>b.addEventListener('click',()=>openLeadConversation(b.dataset.leadOpen)));
+}
+async function openLeadConversation(id){
+  const {data,error}=await sb.from('whatsapp_conversas').select('id,paciente_id,nome_arquivo,importada_em,resumo,observacoes_nutri,rascunho_resposta').eq('id',id).single();
+  if(error||!data)return toast('Não foi possível abrir esse lead.');
+  state.activeConversation=data;$('summary').value=data.resumo||'';$('notes').value=data.observacoes_nutri||'';$('draft').value=data.rascunho_resposta||'';
+  const {data:msgs}=await sb.from('whatsapp_mensagens').select('id,data_mensagem,remetente,nome_remetente,conteudo,ordem').eq('conversa_id',id).order('ordem');
+  $('leadsList').insertAdjacentHTML('afterbegin','<div id="leadOpened" class="card"><div class="section-head"><h3>'+esc(data.contato_nome||data.nome_arquivo||'Lead')+'</h3><button id="closeLead" class="ghost">Fechar</button></div><div class="message-list">'+(msgs||[]).slice(-100).map(m=>'<div class="message"><div class="meta"><span>'+esc(m.nome_remetente||m.remetente)+'</span><span>'+formatDate(m.data_mensagem)+'</span></div><div class="body">'+esc(m.conteudo)+'</div></div>').join('')+'</div><p class="small muted">Edite o resumo, as observações e o rascunho na área de anotações ao selecionar um paciente? Para leads, a edição será ampliada em próxima etapa.</p></div>');
+  $('closeLead').onclick=()=>$('leadOpened')?.remove();toast('Lead aberto para consulta.');
 }
 function renderPatients(){
   const q=norm($('patientSearch').value);
@@ -241,6 +315,7 @@ async function createTask(){
   toast('Lembrete criado.');await loadTasks();
 }
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginError').textContent='E-mail ou senha incorretos.';return}await showApp(data.user)});
+$('weeklyPreviewBtn').onclick=analyzeWeeklyFiles;$('weeklySaveBtn').onclick=saveWeeklyImport;$('refreshLeadsBtn').onclick=loadLeads;
 $('logoutBtn').onclick=async()=>{await sb.auth.signOut();state.user=null;$('appScreen').classList.add('hidden');$('authScreen').classList.remove('hidden')};
 $('patientSearch').addEventListener('input',renderPatients);
 $('txtFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{$('conversationText').value=await file.text();$('previewInfo').textContent='Arquivo carregado: '+file.name;state.previewName=file.name}catch{toast('Não foi possível ler o arquivo.')}});
