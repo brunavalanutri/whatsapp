@@ -156,9 +156,9 @@ async function loadPatients(){
   state.patients=data||[];$('patientCount').textContent=state.patients.length;renderPatients();await loadLeads();
 }
 function classifyWeeklyFile(file,raw){
-  const name=file.name.replace(/\\.txt$/i,'').replace(/[_-]+/g,' ').trim();
+  const name=file.name.replace(/\.txt$/i,'').replace(/[_-]+/g,' ').trim();
   const n=norm(name);
-  const patient=state.patients.find(p=>{const pn=norm(p.nome);const phone=String(p.celular||'').replace(/\\D/g,'');const nf=n.replace(/\\D/g,'');return (pn.length>2&&(n===pn||n.includes(pn)||pn.includes(n)))||(phone.length>=8&&nf.includes(phone))});
+  const patient=state.patients.find(p=>{const pn=norm(p.nome);const phone=String(p.celular||'').replace(/\D/g,'');const nf=n.replace(/\D/g,'');return (pn.length>2&&(n===pn||n.includes(pn)||pn.includes(n)))||(phone.length>=8&&nf.includes(phone))});
   const messages=parseWhatsApp(raw,patient?.nome||name,$('weeklyNutriAlias').value.trim());
   const senders=[...new Set(messages.map(m=>norm(m.sender)).filter(Boolean))];
   const groupMarkers=/\b(created group|added you|added .* to the group|changed the subject|changed this group's icon|left the group|removed .* from the group|criou o grupo|adicionou|alterou o nome do grupo|alterou a imagem do grupo|saiu do grupo|removeu)\b/i.test(raw);
