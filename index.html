@@ -11,7 +11,7 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;background:var(--green);color:white;font-weight:650}button.secondary{background:#edf0ed;color:#27332b;border:1px solid var(--line)}button.ghost{background:transparent;color:var(--green);padding:7px}button.danger{background:#fae9e7;color:var(--red)}button:disabled{opacity:.5;cursor:not-allowed}input,textarea,select{width:100%;border:1px solid #dce2dc;background:#fff;border-radius:10px;padding:11px 12px;color:var(--text);outline:none}input:focus,textarea:focus,select:focus{border-color:#75a18a;box-shadow:0 0 0 3px #28664d13}textarea{resize:vertical;min-height:100px}label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:0 0 6px}.hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.app{max-width:1440px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:var(--green);color:white;font-size:20px}.brand h1{font-size:20px;margin:0;letter-spacing:-.5px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px}.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.sidebar{padding:16px;align-self:start}.main{min-width:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}.section-head h2{font-size:16px;margin:0}.patient-list{display:grid;gap:5px;margin-top:12px;max-height:62vh;overflow:auto}.patient{padding:11px;border-radius:11px;border:1px solid transparent;text-align:left;background:transparent;color:var(--text);font-weight:500;width:100%}.patient:hover{background:#f5f7f5}.patient.active{background:var(--green2);border-color:#cce0d1}.patient strong{display:block;font-size:14px}.patient span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.badge{display:inline-block;border-radius:99px;padding:4px 8px;font-size:11px;font-weight:700;background:#edf0ed;color:#566159}.badge.green{background:var(--green2);color:var(--green)}.badge.amber{background:var(--amber);color:#805b0a}.content-head{padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.content-head h2{margin:0;font-size:21px;letter-spacing:-.5px}.content-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}.stat{padding:16px}.stat span{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:23px;margin-top:4px}.columns{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:16px}.card{padding:18px;margin-bottom:16px}.card h3{margin:0 0 5px;font-size:15px}.card .sub{color:var(--muted);font-size:12px;margin:0 0 15px}.field{margin-bottom:13px}.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.row .grow{flex:1}.message-list{display:grid;gap:8px;max-height:350px;overflow:auto;margin:12px 0}.message{padding:10px 12px;border-radius:12px;background:#f3f5f3;border:1px solid #e8ebe8}.message.patient-msg{background:#eaf4ed;border-color:#dcebe0}.message .meta{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);margin-bottom:4px}.message .body{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}.task{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.task .details{flex:1;min-width:0}.task strong{display:block;font-size:13px}.task p{margin:3px 0;color:var(--muted);font-size:12px}.empty{padding:26px 14px;text-align:center;color:var(--muted);border:1px dashed #d7ddd7;border-radius:12px;font-size:13px}.notice{padding:11px 13px;border-radius:10px;background:#eef4ef;color:#315641;font-size:12px;margin-bottom:14px}.notice.warning{background:#fff4d8;color:#77560a}.toast{position:fixed;right:20px;bottom:20px;background:#202923;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);max-width:min(400px,calc(100vw - 40px));z-index:10}.auth-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.auth{width:min(420px,100%);padding:28px}.auth h1{margin:0 0 6px;font-size:24px}.auth p{color:var(--muted);margin:0 0 22px}.import-preview{background:#f7f8f7;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;max-height:170px;overflow:auto;white-space:pre-wrap}.footer{font-size:11px;color:var(--muted);text-align:center;padding:10px}.mobile-select{display:none}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{padding:13px}.patient-list{display:flex;max-height:none;overflow-x:auto}.patient{min-width:175px;border:1px solid var(--line)}.columns{grid-template-columns:1fr}.content-head{align-items:flex-start}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:20px}}
 @media(max-width:540px){.app{padding:12px}.top{align-items:flex-start}.brand h1{font-size:17px}.top button{padding:8px;font-size:12px}.content-head{padding:15px}.content-head h2{font-size:18px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.row.stack-mobile{align-items:stretch;flex-direction:column}.row.stack-mobile button{width:100%}.card{padding:14px}.patient-list{gap:7px}}
-</style>
+.dashboard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}.dash-stat{padding:16px}.dash-stat span{font-size:12px;color:var(--muted)}.dash-stat strong{display:block;font-size:25px;margin-top:4px}.dash-tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}th{color:var(--muted);font-weight:700;background:#fafbfa}td input{min-width:135px;padding:7px;font-size:12px}td .contact-note{min-width:180px}.contact-edit{display:flex;gap:6px;align-items:center;min-width:230px}.contact-edit button{padding:7px 9px;font-size:11px}@media(max-width:900px){.dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-tables{grid-template-columns:1fr}}</style>
 </head>
 <body>
 <div id="authScreen" class="auth-wrap">
@@ -31,7 +31,21 @@
     <div class="row"><span id="userLabel" class="muted small"></span><button class="secondary" id="logoutBtn">Sair</button></div>
   </header>
   <div class="notice">As conversas são importadas manualmente. Este aplicativo não acessa automaticamente o WhatsApp e não envia mensagens.</div>
-  <section class="card" id="weeklyImportCard">
+
+  <section class="card" id="dashboardCard">
+    <div class="section-head"><div><h2 style="margin:0;font-size:18px">Dashboard de acompanhamento</h2><p class="sub" style="margin:4px 0 0">Visão rápida dos contatos e pacientes que precisam de atualização.</p></div><button id="refreshDashboardBtn" class="secondary">Atualizar painel</button></div>
+    <div class="dashboard-grid">
+      <div class="panel dash-stat"><span>Pacientes ativos</span><strong id="dashActive">0</strong></div>
+      <div class="panel dash-stat"><span>Contato nos últimos 7 dias</span><strong id="dashRecent">0</strong></div>
+      <div class="panel dash-stat"><span>Mais de 10 dias sem contato</span><strong id="dashOverdue">0</strong></div>
+      <div class="panel dash-stat"><span>Sem data registrada</span><strong id="dashNoDate">0</strong></div>
+    </div>
+    <div class="dash-tables">
+      <section class="card" style="margin:0"><h3>Pacientes conversados nos últimos 7 dias</h3><p class="sub">Considera a data de contato registrada ou a data da conversa importada mais recente.</p><div id="recentPatientsTable" class="table-wrap"><div class="empty">Carregando...</div></div></section>
+      <section class="card" style="margin:0"><h3>Sem atualização ou contato há mais de 10 dias</h3><p class="sub">Pacientes sem data de contato registrada também aparecem para você conferir.</p><div id="overduePatientsTable" class="table-wrap"><div class="empty">Carregando...</div></div></section>
+    </div>
+    <section class="card" style="margin:16px 0 0"><h3>Registro manual da última conversa</h3><p class="sub">Atualize a data quando conversar com o paciente, mesmo que a conversa não tenha sido importada. A observação é opcional.</p><div id="contactRegisterTable" class="table-wrap"><div class="empty">Carregando pacientes...</div></div></section>
+  </section>\n  <section class="card" id="weeklyImportCard">
     <div class="section-head"><div><h2 style="margin:0;font-size:17px">Importação geral da semana</h2><p class="sub" style="margin:4px 0 0">Selecione vários arquivos .txt exportados do WhatsApp. Grupos identificados serão excluídos da importação.</p></div><span class="badge">Em lote</span></div>
     <div class="field"><label for="weeklyFiles">Arquivos de conversas (.txt — selecione vários)</label><input id="weeklyFiles" type="file" accept=".txt,text/plain" multiple></div>
     <div class="field"><label for="weeklyNutriAlias">Seu nome no WhatsApp</label><input id="weeklyNutriAlias" placeholder="Ex.: Bruna"></div>
@@ -107,7 +121,7 @@ const SUPABASE_URL='https://fcxinzdazmnuodwujqpj.supabase.co';
 const SUPABASE_KEY='sb_publishable_VSXr4uYY_okHJpJqiGUUBw_kkBW2ZgU';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const $=id=>document.getElementById(id);
-const state={patients:[],selected:null,conversations:[],tasks:[],activeConversation:null,preview:[],previewName:'',user:null,weekly:[]};
+const state={patients:[],selected:null,conversations:[],tasks:[],activeConversation:null,preview:[],previewName:'',user:null,weekly:[],contactRows:[]};
 let toastTimer;
 function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3500)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -153,7 +167,7 @@ async function showApp(user){
 async function loadPatients(){
   const {data,error}=await sb.from('pacientes').select('id,nome,celular,cc,paciente_ativo,acesso_ativo').order('nome');
   if(error){console.error(error);toast('Não foi possível carregar os pacientes.');return}
-  state.patients=data||[];$('patientCount').textContent=state.patients.length;renderPatients();await loadLeads();
+  state.patients=data||[];$('patientCount').textContent=state.patients.length;renderPatients();await loadLeads();await loadDashboard();
 }
 function classifyWeeklyFile(file,raw){
   const name=file.name.replace(/\.txt$/i,'').replace(/[_-]+/g,' ').trim();
@@ -216,7 +230,38 @@ async function openLeadConversation(id){
   $('leadsList').insertAdjacentHTML('afterbegin','<div id="leadOpened" class="card"><div class="section-head"><h3>'+esc(data.contato_nome||data.nome_arquivo||'Lead')+'</h3><button id="closeLead" class="ghost">Fechar</button></div><div class="message-list">'+(msgs||[]).slice(-100).map(m=>'<div class="message"><div class="meta"><span>'+esc(m.nome_remetente||m.remetente)+'</span><span>'+formatDate(m.data_mensagem)+'</span></div><div class="body">'+esc(m.conteudo)+'</div></div>').join('')+'</div><p class="small muted">Edite o resumo, as observações e o rascunho na área de anotações ao selecionar um paciente? Para leads, a edição será ampliada em próxima etapa.</p></div>');
   $('closeLead').onclick=()=>$('leadOpened')?.remove();toast('Lead aberto para consulta.');
 }
-function renderPatients(){
+
+function dateOnly(v){if(!v)return '';const d=new Date(v);if(Number.isNaN(d.getTime()))return '';return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function daysSince(dateStr){if(!dateStr)return null;const d=new Date(dateStr+'T12:00:00');if(Number.isNaN(d.getTime()))return null;const today=new Date();today.setHours(12,0,0,0);return Math.floor((today-d)/86400000)}
+function patientTable(rows,editable=false){
+ if(!rows.length)return '<div class="empty">Nenhum paciente nesta lista.</div>';
+ return '<table><thead><tr><th>Paciente</th><th>Último contato</th>'+(editable?'<th>Registrar / atualizar</th>':'')+'</tr></thead><tbody>'+rows.map(r=>'<tr><td><strong>'+esc(r.patient.nome)+'</strong></td><td>'+(r.lastDate?formatDay(r.lastDate):'<span class="badge amber">Sem registro</span>')+'</td>'+(editable?'<td><div class="contact-edit"><input type="date" id="contact-date-'+r.patient.id+'" value="'+esc(r.manualDate||'')+'" aria-label="Última conversa com '+esc(r.patient.nome)+'"><input class="contact-note" id="contact-note-'+r.patient.id+'" placeholder="Observação (opcional)" value="'+esc(r.note||'')+'" aria-label="Observação do contato com '+esc(r.patient.nome)+'"><button data-save-contact="'+r.patient.id+'">Salvar</button></div></td>':'')+'</tr>').join('')+'</tbody></table>';
+}
+async function loadDashboard(){
+ const active=state.patients.filter(p=>p.paciente_ativo!==false);
+ const [contactsResult,conversationsResult]=await Promise.all([
+  sb.from('whatsapp_paciente_contatos').select('paciente_id,ultima_conversa_em,observacao'),
+  sb.from('whatsapp_conversas').select('paciente_id,fim_mensagens,inicio_mensagens,importada_em').eq('categoria','paciente').not('paciente_id','is',null).order('importada_em',{ascending:false})
+ ]);
+ if(contactsResult.error){console.error(contactsResult.error);$('recentPatientsTable').innerHTML='<div class="empty">Não foi possível carregar os registros de contato.</div>';return}
+ const contactMap=new Map((contactsResult.data||[]).map(x=>[x.paciente_id,x]));
+ const latestMap=new Map();
+ for(const conv of conversationsResult.data||[]){if(conv.paciente_id&&!latestMap.has(conv.paciente_id))latestMap.set(conv.paciente_id,dateOnly(conv.fim_mensagens||conv.inicio_mensagens||conv.importada_em))}
+ state.contactRows=active.map(patient=>{const manual=contactMap.get(patient.id);const latest=latestMap.get(patient.id)||'';return {patient,manualDate:manual?.ultima_conversa_em||'',lastDate:manual?.ultima_conversa_em||latest,note:manual?.observacao||''}});
+ const recent=state.contactRows.filter(r=>{const d=daysSince(r.lastDate);return d!==null&&d>=0&&d<=7}).sort((a,b)=>String(b.lastDate).localeCompare(String(a.lastDate)));
+ const overdue=state.contactRows.filter(r=>{const d=daysSince(r.lastDate);return d===null||d>10}).sort((a,b)=>{if(!a.lastDate)return -1;if(!b.lastDate)return 1;return a.lastDate.localeCompare(b.lastDate)});
+ $('dashActive').textContent=active.length;$('dashRecent').textContent=recent.length;$('dashOverdue').textContent=overdue.length;$('dashNoDate').textContent=state.contactRows.filter(r=>!r.lastDate).length;
+ $('recentPatientsTable').innerHTML=patientTable(recent);$('overduePatientsTable').innerHTML=patientTable(overdue);$('contactRegisterTable').innerHTML=patientTable(state.contactRows,true);
+ document.querySelectorAll('[data-save-contact]').forEach(b=>b.addEventListener('click',()=>saveContactRecord(b.dataset.saveContact)));
+}
+async function saveContactRecord(patientId){
+ const date=$('contact-date-'+patientId)?.value||null;const note=$('contact-note-'+patientId)?.value.trim()||'';
+ const payload={paciente_id:patientId,ultima_conversa_em:date,observacao:note,atualizado_por:state.user?.id||null,atualizado_em:new Date().toISOString()};
+ const {error}=await sb.from('whatsapp_paciente_contatos').upsert(payload,{onConflict:'paciente_id'});
+ if(error){console.error(error);toast('Não foi possível salvar a data do contato.');return}
+ toast('Último contato atualizado.');await loadDashboard();
+}
+\nfunction renderPatients(){
   const q=norm($('patientSearch').value);
   const arr=state.patients.filter(p=>norm(p.nome).includes(q)||norm(p.celular).includes(q));
   $('patientList').innerHTML=arr.length?arr.map(p=>'<button class="patient '+(state.selected?.id===p.id?'active':'')+'" data-patient="'+p.id+'"><strong>'+esc(p.nome)+'</strong><span>'+esc(p.celular||'Sem celular')+' · '+(p.paciente_ativo===false?'Inativo':'Ativo')+'</span></button>').join(''):'<div class="empty">Nenhum paciente encontrado.</div>';
@@ -315,7 +360,7 @@ async function createTask(){
   toast('Lembrete criado.');await loadTasks();
 }
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginError').textContent='E-mail ou senha incorretos.';return}await showApp(data.user)});
-$('weeklyPreviewBtn').onclick=analyzeWeeklyFiles;$('weeklySaveBtn').onclick=saveWeeklyImport;$('refreshLeadsBtn').onclick=loadLeads;
+$('refreshDashboardBtn').onclick=loadDashboard;$('weeklyPreviewBtn').onclick=analyzeWeeklyFiles;$('weeklySaveBtn').onclick=saveWeeklyImport;$('refreshLeadsBtn').onclick=loadLeads;
 $('logoutBtn').onclick=async()=>{await sb.auth.signOut();state.user=null;$('appScreen').classList.add('hidden');$('authScreen').classList.remove('hidden')};
 $('patientSearch').addEventListener('input',renderPatients);
 $('txtFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{$('conversationText').value=await file.text();$('previewInfo').textContent='Arquivo carregado: '+file.name;state.previewName=file.name}catch{toast('Não foi possível ler o arquivo.')}});
