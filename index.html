@@ -11,7 +11,19 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;background:var(--green);color:white;font-weight:650}button.secondary{background:#edf0ed;color:#27332b;border:1px solid var(--line)}button.ghost{background:transparent;color:var(--green);padding:7px}button.danger{background:#fae9e7;color:var(--red)}button:disabled{opacity:.5;cursor:not-allowed}input,textarea,select{width:100%;border:1px solid #dce2dc;background:#fff;border-radius:10px;padding:11px 12px;color:var(--text);outline:none}input:focus,textarea:focus,select:focus{border-color:#75a18a;box-shadow:0 0 0 3px #28664d13}textarea{resize:vertical;min-height:100px}label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:0 0 6px}.hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.app{max-width:1440px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:var(--green);color:white;font-size:20px}.brand h1{font-size:20px;margin:0;letter-spacing:-.5px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px}.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.sidebar{padding:16px;align-self:start}.main{min-width:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px}.section-head h2{font-size:16px;margin:0}.patient-list{display:grid;gap:5px;margin-top:12px;max-height:62vh;overflow:auto}.patient{padding:11px;border-radius:11px;border:1px solid transparent;text-align:left;background:transparent;color:var(--text);font-weight:500;width:100%}.patient:hover{background:#f5f7f5}.patient.active{background:var(--green2);border-color:#cce0d1}.patient strong{display:block;font-size:14px}.patient span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.badge{display:inline-block;border-radius:99px;padding:4px 8px;font-size:11px;font-weight:700;background:#edf0ed;color:#566159}.badge.green{background:var(--green2);color:var(--green)}.badge.amber{background:var(--amber);color:#805b0a}.content-head{padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.content-head h2{margin:0;font-size:21px;letter-spacing:-.5px}.content-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}.stat{padding:16px}.stat span{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:23px;margin-top:4px}.columns{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:16px}.card{padding:18px;margin-bottom:16px}.card h3{margin:0 0 5px;font-size:15px}.card .sub{color:var(--muted);font-size:12px;margin:0 0 15px}.field{margin-bottom:13px}.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.row .grow{flex:1}.message-list{display:grid;gap:8px;max-height:350px;overflow:auto;margin:12px 0}.message{padding:10px 12px;border-radius:12px;background:#f3f5f3;border:1px solid #e8ebe8}.message.patient-msg{background:#eaf4ed;border-color:#dcebe0}.message .meta{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);margin-bottom:4px}.message .body{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}.task{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.task .details{flex:1;min-width:0}.task strong{display:block;font-size:13px}.task p{margin:3px 0;color:var(--muted);font-size:12px}.empty{padding:26px 14px;text-align:center;color:var(--muted);border:1px dashed #d7ddd7;border-radius:12px;font-size:13px}.notice{padding:11px 13px;border-radius:10px;background:#eef4ef;color:#315641;font-size:12px;margin-bottom:14px}.notice.warning{background:#fff4d8;color:#77560a}.toast{position:fixed;right:20px;bottom:20px;background:#202923;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);max-width:min(400px,calc(100vw - 40px));z-index:10}.auth-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.auth{width:min(420px,100%);padding:28px}.auth h1{margin:0 0 6px;font-size:24px}.auth p{color:var(--muted);margin:0 0 22px}.import-preview{background:#f7f8f7;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px;max-height:170px;overflow:auto;white-space:pre-wrap}.footer{font-size:11px;color:var(--muted);text-align:center;padding:10px}.mobile-select{display:none}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{padding:13px}.patient-list{display:flex;max-height:none;overflow-x:auto}.patient{min-width:175px;border:1px solid var(--line)}.columns{grid-template-columns:1fr}.content-head{align-items:flex-start}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:20px}}
 @media(max-width:540px){.app{padding:12px}.top{align-items:flex-start}.brand h1{font-size:17px}.top button{padding:8px;font-size:12px}.content-head{padding:15px}.content-head h2{font-size:18px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.row.stack-mobile{align-items:stretch;flex-direction:column}.row.stack-mobile button{width:100%}.card{padding:14px}.patient-list{gap:7px}}
-.dashboard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}.dash-stat{padding:16px}.dash-stat span{font-size:12px;color:var(--muted)}.dash-stat strong{display:block;font-size:25px;margin-top:4px}.dash-tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}th{color:var(--muted);font-weight:700;background:#fafbfa}td input{min-width:135px;padding:7px;font-size:12px}td .contact-note{min-width:180px}.contact-edit{display:flex;gap:6px;align-items:center;min-width:230px}.contact-edit button{padding:7px 9px;font-size:11px}@media(max-width:900px){.dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-tables{grid-template-columns:1fr}}</style>
+.dashboard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}.dash-stat{padding:16px}.dash-stat span{font-size:12px;color:var(--muted)}.dash-stat strong{display:block;font-size:25px;margin-top:4px}.dash-tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}th{color:var(--muted);font-weight:700;background:#fafbfa}td input{min-width:135px;padding:7px;font-size:12px}td .contact-note{min-width:180px}.contact-edit{display:flex;gap:6px;align-items:center;min-width:230px}.contact-edit button{padding:7px 9px;font-size:11px}@media(max-width:900px){.dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-tables{grid-template-columns:1fr}}
+/* Navegacao por areas */
+.app-shell{display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px;align-items:start}
+.app-nav{position:sticky;top:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+.app-nav-title{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:9px 10px 12px}
+.app-nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid transparent;padding:12px 11px;margin:2px 0;font-weight:600}
+.app-nav button:hover{background:#f5f7f5}
+.app-nav button.active{background:var(--green2);border-color:#cce0d1;color:var(--green)}
+.app-nav .nav-icon{width:24px;text-align:center;font-size:17px}
+.app-content{min-width:0}
+.app-page{min-width:0}
+@media(max-width:900px){.app-shell{grid-template-columns:1fr}.app-nav{position:static;display:flex;gap:6px;overflow-x:auto;padding:8px}.app-nav-title{display:none}.app-nav button{width:auto;white-space:nowrap;margin:0;padding:10px}.app-nav .nav-icon{width:auto}}
+</style>
 </head>
 <body>
 <div id="authScreen" class="auth-wrap">
@@ -360,6 +372,38 @@ async function createTask(){
   if(error){console.error(error);toast('Não foi possível criar o lembrete.');return}
   toast('Lembrete criado.');await loadTasks();
 }
+
+function setupNavigation(){
+  const app=$('appScreen');
+  const notice=app.querySelector('.notice');
+  const dashboard=$('dashboardCard'), weekly=$('weeklyImportCard'), leads=$('leadsCard'), patients=app.querySelector('.layout');
+  if(!notice||!dashboard||!weekly||!leads||!patients)return;
+  const shell=document.createElement('div');shell.className='app-shell';
+  const nav=document.createElement('nav');nav.className='app-nav';nav.setAttribute('aria-label','Menu principal');
+  nav.innerHTML='<div class="app-nav-title">Menu principal</div>'+
+    '<button type="button" data-page="dashboard" class="active"><span class="nav-icon">▦</span>Dashboard</button>'+
+    '<button type="button" data-page="importacao"><span class="nav-icon">⇧</span>Importar conversas</button>'+
+    '<button type="button" data-page="pacientes"><span class="nav-icon">♙</span>Pacientes</button>';
+  const content=document.createElement('div');content.className='app-content';
+  const pages={};
+  [['dashboard',[dashboard]],['importacao',[weekly,leads]],['pacientes',[patients]]].forEach(([key,nodes])=>{
+    const page=document.createElement('div');page.className='app-page';page.dataset.pageContent=key;
+    nodes.forEach(node=>page.appendChild(node));content.appendChild(page);pages[key]=page;
+  });
+  notice.insertAdjacentElement('afterend',shell);shell.append(nav,content);
+  function showPage(key){
+    Object.entries(pages).forEach(([name,page])=>page.classList.toggle('hidden',name!==key));
+    nav.querySelectorAll('[data-page]').forEach(button=>{
+      const active=button.dataset.page===key;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');
+    });
+    if(key==='dashboard'&&state.user)loadDashboard();
+    if(key==='importacao'&&state.user)loadLeads();
+  }
+  nav.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
+  showPage('dashboard');
+}
+
+setupNavigation();
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('loginError').textContent='E-mail ou senha incorretos.';return}await showApp(data.user)});
 $('refreshDashboardBtn').onclick=loadDashboard;$('weeklyPreviewBtn').onclick=analyzeWeeklyFiles;$('weeklySaveBtn').onclick=saveWeeklyImport;$('refreshLeadsBtn').onclick=loadLeads;
 $('logoutBtn').onclick=async()=>{await sb.auth.signOut();state.user=null;$('appScreen').classList.add('hidden');$('authScreen').classList.remove('hidden')};
